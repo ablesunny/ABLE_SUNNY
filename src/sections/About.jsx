@@ -69,18 +69,18 @@ const About = () => {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="relative"
           >
-            <motion.div style={{ y: imageY, scale: imageScale }}>
-              <div className="aspect-[3/4] max-h-[500px] overflow-hidden">
-                <img
-                  src="/about-photo.jpg"
-                  alt="Able Sunny"
-                  className="w-full h-full object-cover object-center"
-                  style={{
-                    filter: 'grayscale(0.6) contrast(1.05) brightness(0.95)',
-                  }}
-                />
-              </div>
-            </motion.div>
+            <div className="aspect-[3/4] max-h-[500px] overflow-hidden border border-white/[0.05]">
+              <motion.img
+                src="/about-photo.jpg"
+                alt="Able Sunny"
+                className="w-full h-full object-cover object-center"
+                style={{
+                  y: imageY, 
+                  scale: imageScale,
+                  filter: 'grayscale(0.6) contrast(1.05) brightness(0.95)',
+                }}
+              />
+            </div>
           </motion.div>
 
           {/* Text content */}
@@ -173,14 +173,14 @@ const About = () => {
               </div>
             </motion.div>
 
-            {/* Download Resume CTA */}
+            {/* View Projects CTA */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.75 }}
             >
-              <a href="/resume.pdf" download className="btn-primary inline-flex">
-                <span>Download Resume</span>
+              <a href="#projects" className="btn-primary inline-flex" onClick={(e) => { e.preventDefault(); handleClick('#projects'); }}>
+                <span>View Projects</span>
               </a>
             </motion.div>
           </div>

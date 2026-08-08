@@ -1,13 +1,11 @@
 import { useState, useRef } from 'react'
 import { motion } from 'framer-motion'
 import emailjs from '@emailjs/browser'
-import SectionHeading from '../components/SectionHeading'
-import { contactInfo } from '../data'
-import { FaPaperPlane, FaCheck, FaExclamationTriangle } from 'react-icons/fa'
+import { FaArrowRight, FaCheck, FaExclamationTriangle } from 'react-icons/fa'
 
 const Contact = () => {
   const formRef = useRef(null)
-  const [form, setForm] = useState({ from_name: '', from_email: '', subject: '', message: '' })
+  const [form, setForm] = useState({ from_name: '', from_email: '', phone: '', message: '' })
   const [status, setStatus] = useState('idle') // idle | sending | sent | error
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
@@ -17,20 +15,14 @@ const Contact = () => {
     setStatus('sending')
 
     try {
-      // EmailJS configuration
-      // To set up: go to emailjs.com, create a free account, and get your:
-      // 1. Service ID (from Email Services)
-      // 2. Template ID (from Email Templates)
-      // 3. Public Key (from Account > API Keys)
-      // Then replace the placeholder values below
       await emailjs.sendForm(
-        'service_portfolio',    // Replace with your EmailJS Service ID
-        'template_contact',     // Replace with your EmailJS Template ID
+        'service_portfolio',
+        'template_contact',
         formRef.current,
-        'YOUR_PUBLIC_KEY'       // Replace with your EmailJS Public Key
+        'YOUR_PUBLIC_KEY'
       )
       setStatus('sent')
-      setForm({ from_name: '', from_email: '', subject: '', message: '' })
+      setForm({ from_name: '', from_email: '', phone: '', message: '' })
       setTimeout(() => setStatus('idle'), 4000)
     } catch (error) {
       console.error('EmailJS Error:', error)
@@ -40,99 +32,120 @@ const Contact = () => {
   }
 
   return (
-    <section id="contact" className="section-padding relative">
-      <div className="container">
-        <SectionHeading title="Get In Touch" subtitle="Contact" />
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 max-w-5xl">
-          {/* Contact Info */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ type: "spring", stiffness: 80, damping: 15 }}
-            className="space-y-8"
-          >
-            <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">
-              I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Let's build something great together.
-            </p>
-            <div className="space-y-5">
-              {contactInfo.map((item, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: -30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ type: "spring", stiffness: 100, damping: 15, delay: i * 0.08 }}
-                  className="flex items-center gap-4 group"
-                >
-                  <div className="w-10 h-10 border border-white/10 flex items-center justify-center group-hover:border-white/30 transition-colors duration-300">
-                    <item.icon className="text-sm text-[var(--color-text-muted)] group-hover:text-white transition-colors duration-300" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-[family-name:var(--font-heading)] uppercase tracking-[0.2em] text-[var(--color-text-muted)]">{item.label}</p>
-                    {item.href ? (
-                      <a href={item.href} target={item.href.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer" className="text-sm text-white hover:text-white/80 transition-colors">
-                        {item.value}
-                      </a>
-                    ) : (
-                      <p className="text-sm text-white">{item.value}</p>
-                    )}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Contact Form */}
-          <motion.form
-            ref={formRef}
-            onSubmit={handleSubmit}
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ type: "spring", stiffness: 80, damping: 15 }}
-            className="space-y-6"
-          >
-            <div className="grid sm:grid-cols-2 gap-6">
-              <div>
-                <label htmlFor="from_name" className="text-[10px] font-[family-name:var(--font-heading)] uppercase tracking-[0.2em] text-[var(--color-text-muted)] mb-2 block">Name</label>
-                <input type="text" id="from_name" name="from_name" value={form.from_name} onChange={handleChange} required className="w-full bg-transparent border border-white/10 px-4 py-3 text-sm text-white focus:border-white/40 outline-none transition-colors" placeholder="Your name" />
-              </div>
-              <div>
-                <label htmlFor="from_email" className="text-[10px] font-[family-name:var(--font-heading)] uppercase tracking-[0.2em] text-[var(--color-text-muted)] mb-2 block">Email</label>
-                <input type="email" id="from_email" name="from_email" value={form.from_email} onChange={handleChange} required className="w-full bg-transparent border border-white/10 px-4 py-3 text-sm text-white focus:border-white/40 outline-none transition-colors" placeholder="your@email.com" />
-              </div>
-            </div>
-            <div>
-              <label htmlFor="subject" className="text-[10px] font-[family-name:var(--font-heading)] uppercase tracking-[0.2em] text-[var(--color-text-muted)] mb-2 block">Subject</label>
-              <input type="text" id="subject" name="subject" value={form.subject} onChange={handleChange} required className="w-full bg-transparent border border-white/10 px-4 py-3 text-sm text-white focus:border-white/40 outline-none transition-colors" placeholder="What's this about?" />
-            </div>
-            <div>
-              <label htmlFor="message" className="text-[10px] font-[family-name:var(--font-heading)] uppercase tracking-[0.2em] text-[var(--color-text-muted)] mb-2 block">Message</label>
-              <textarea id="message" name="message" value={form.message} onChange={handleChange} required rows={5} className="w-full bg-transparent border border-white/10 px-4 py-3 text-sm text-white focus:border-white/40 outline-none transition-colors resize-none" placeholder="Tell me about your project..." />
-            </div>
-            <button
-              type="submit"
-              disabled={status === 'sending'}
-              className={`btn-primary w-full justify-center group ${status === 'sending' ? 'opacity-70 cursor-wait' : ''}`}
+    <section id="contact" className="py-24 md:py-32 relative bg-[#0A0A0A] overflow-hidden">
+      <div className="container max-w-7xl mx-auto px-4 sm:px-8 md:px-12">
+        <div className="grid lg:grid-cols-[1.2fr_1fr] gap-16 lg:gap-24">
+          
+          {/* Left Column: Typography & Graphic */}
+          <div className="flex flex-col justify-between relative">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              className="relative z-10"
             >
-              <span className="flex items-center gap-2">
-                {status === 'idle' && <><span>Send Message</span> <FaPaperPlane className="text-xs group-hover:translate-x-1 transition-transform" /></>}
-                {status === 'sending' && <><span>Sending...</span></>}
-                {status === 'sent' && <><FaCheck className="text-xs" /> <span>Message Sent!</span></>}
-                {status === 'error' && <><FaExclamationTriangle className="text-xs" /> <span>Failed — Try Again</span></>}
-              </span>
-            </button>
-            {status === 'sent' && (
-              <motion.p
-                initial={{ opacity: 0, y: 5 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="text-xs text-green-400/80 text-center"
-              >
-                Thank you! I'll get back to you soon.
-              </motion.p>
-            )}
-          </motion.form>
+              <h2 className="text-[clamp(4.5rem,12vw,9rem)] font-[family-name:var(--font-display)] leading-[0.85] text-white uppercase tracking-tight">
+                Let's<br />
+                Get In<br />
+                Touch
+              </h2>
+            </motion.div>
+
+            {/* Abstract Graphic */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.5, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="absolute top-0 right-0 md:right-10 lg:-right-10 pointer-events-none mix-blend-difference"
+            >
+              <svg width="200" height="150" viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="100" cy="25" r="22" fill="white" />
+                <path d="M 20 60 L 180 60 A 80 80 0 0 1 20 60 Z" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" />
+              </svg>
+            </motion.div>
+          </div>
+
+          {/* Right Column: Form & Contact Details */}
+          <div className="flex flex-col justify-between">
+            <motion.form
+              ref={formRef}
+              onSubmit={handleSubmit}
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div className="space-y-12">
+                {/* Full Name */}
+                <div className="relative group">
+                  <label className="text-[10px] font-[family-name:var(--font-body)] font-semibold uppercase tracking-[0.2em] text-white/50 mb-3 block">
+                    Full Name <span className="float-right text-white/30">*</span>
+                  </label>
+                  <input type="text" name="from_name" value={form.from_name} onChange={handleChange} required className="w-full bg-transparent border-b border-white/20 pb-4 text-sm text-white focus:border-white outline-none transition-colors" />
+                </div>
+
+                {/* Email & Phone */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-12 sm:gap-8">
+                  <div className="relative group">
+                    <label className="text-[10px] font-[family-name:var(--font-body)] font-semibold uppercase tracking-[0.2em] text-white/50 mb-3 block">
+                      Email <span className="float-right text-white/30">*</span>
+                    </label>
+                    <input type="email" name="from_email" value={form.from_email} onChange={handleChange} required className="w-full bg-transparent border-b border-white/20 pb-4 text-sm text-white focus:border-white outline-none transition-colors" />
+                  </div>
+                  <div className="relative group">
+                    <label className="text-[10px] font-[family-name:var(--font-body)] font-semibold uppercase tracking-[0.2em] text-white/50 mb-3 block">
+                      Phone <span className="float-right text-white/30">*</span>
+                    </label>
+                    <input type="text" name="phone" value={form.phone} onChange={handleChange} required className="w-full bg-transparent border-b border-white/20 pb-4 text-sm text-white focus:border-white outline-none transition-colors" />
+                  </div>
+                </div>
+
+                {/* Message */}
+                <div className="relative group">
+                  <label className="text-[10px] font-[family-name:var(--font-body)] font-semibold uppercase tracking-[0.2em] text-white/50 mb-3 block">
+                    Message <span className="float-right text-white/30">*</span>
+                  </label>
+                  <input type="text" name="message" value={form.message} onChange={handleChange} required className="w-full bg-transparent border-b border-white/20 pb-4 text-sm text-white focus:border-white outline-none transition-colors" />
+                </div>
+
+                {/* Submit Arrow */}
+                <div className="flex items-center justify-between pt-4">
+                  <div>
+                    {status === 'sent' && <p className="text-xs text-green-400/80 font-[family-name:var(--font-body)] font-semibold tracking-widest uppercase flex items-center gap-2"><FaCheck /> Sent Successfully</p>}
+                    {status === 'error' && <p className="text-xs text-red-400/80 font-[family-name:var(--font-body)] font-semibold tracking-widest uppercase flex items-center gap-2"><FaExclamationTriangle /> Failed to send</p>}
+                  </div>
+                  <button
+                    type="submit"
+                    disabled={status === 'sending'}
+                    className={`text-2xl md:text-3xl text-white hover:text-white/60 transition-colors ${status === 'sending' ? 'opacity-50 animate-pulse' : ''}`}
+                  >
+                    <FaArrowRight className="font-light" />
+                  </button>
+                </div>
+              </div>
+            </motion.form>
+
+            {/* Contact Details */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              className="mt-24 pt-12 border-t border-white/10 grid grid-cols-2 gap-8 text-[9px] md:text-[10px] font-[family-name:var(--font-body)] font-semibold uppercase tracking-[0.2em] text-white/40"
+            >
+              <div>
+                <p className="text-white mb-4">Location</p>
+                <p className="leading-relaxed">Iritty, Kannur<br/>Kerala, India</p>
+              </div>
+              <div>
+                <p className="text-white mb-4">Direct Contact</p>
+                <p className="leading-relaxed">ablesunnyofficial@gmail.com<br/>+91 9526815773</p>
+              </div>
+            </motion.div>
+          </div>
+
         </div>
       </div>
     </section>
@@ -140,3 +153,4 @@ const Contact = () => {
 }
 
 export default Contact
+

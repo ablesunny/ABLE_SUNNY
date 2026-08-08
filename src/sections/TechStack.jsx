@@ -52,11 +52,6 @@ const TechStack = () => {
                       <span className="text-xs sm:text-sm font-[family-name:var(--font-heading)] uppercase tracking-wider text-[var(--color-text-secondary)] group-hover:text-white transition-colors duration-300">
                         {tech.name}
                       </span>
-                      {tech.learning && (
-                        <span className="text-[8px] font-[family-name:var(--font-heading)] uppercase tracking-wider px-1.5 py-0.5 border border-white/10 text-[var(--color-text-muted)] ml-auto shrink-0">
-                          Learning
-                        </span>
-                      )}
                     </motion.div>
                   ))}
                 </div>

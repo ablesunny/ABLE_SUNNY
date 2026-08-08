@@ -1,5 +1,5 @@
-import { FaReact, FaNodeJs, FaGitAlt, FaGithub, FaFigma, FaHtml5, FaCss3Alt, FaLinkedin, FaEnvelope, FaMapMarkerAlt, FaPhone } from 'react-icons/fa'
-import { SiJavascript, SiVercel, SiFramer, SiOpenai, SiTailwindcss, SiExpress, SiMongodb } from 'react-icons/si'
+import { FaReact, FaNodeJs, FaGitAlt, FaGithub, FaFigma, FaHtml5, FaCss3Alt, FaLinkedin, FaEnvelope, FaMapMarkerAlt, FaPhone, FaDatabase, FaBrain } from 'react-icons/fa'
+import { SiJavascript, SiVercel, SiFramer, SiOpenai, SiTailwindcss, SiExpress, SiMongodb, SiMongoose, SiPostman, SiMysql } from 'react-icons/si'
 import { VscVscode } from 'react-icons/vsc'
 import { TbApi } from 'react-icons/tb'
 
@@ -16,24 +16,27 @@ export const techStack = {
   'Web Development': [
     { name: 'HTML5', icon: FaHtml5 },
     { name: 'CSS3', icon: FaCss3Alt },
-    { name: 'JavaScript', icon: SiJavascript },
-    { name: 'React', icon: FaReact, learning: true },
-    { name: 'Tailwind CSS', icon: SiTailwindcss, learning: true },
-    { name: 'Framer Motion', icon: SiFramer, learning: true },
+    { name: 'JavaScript (ES6+)', icon: SiJavascript },
+    { name: 'React', icon: FaReact },
+    { name: 'Tailwind CSS', icon: SiTailwindcss },
+    { name: 'Framer Motion', icon: SiFramer },
   ],
   'Backend & Database': [
-    { name: 'Node.js', icon: FaNodeJs, learning: true },
-    { name: 'Express.js', icon: SiExpress, learning: true },
-    { name: 'MongoDB', icon: SiMongodb, learning: true },
-    { name: 'REST API', icon: TbApi, learning: true },
+    { name: 'Node.js', icon: FaNodeJs },
+    { name: 'Express.js', icon: SiExpress },
+    { name: 'MongoDB', icon: SiMongodb },
+    { name: 'Mongoose', icon: SiMongoose },
+    { name: 'MySQL', icon: SiMysql },
+    { name: 'Sequelize ORM', icon: FaDatabase },
+    { name: 'REST API', icon: TbApi },
   ],
   'AI & Tools': [
-    { name: 'AI-Assisted Development', icon: SiOpenai },
-    { name: 'Prompt Engineering', icon: SiOpenai },
     { name: 'Git & GitHub', icon: FaGitAlt },
-    { name: 'VS Code', icon: VscVscode },
+    { name: 'Postman', icon: SiPostman },
     { name: 'Figma', icon: FaFigma },
     { name: 'Vercel', icon: SiVercel },
+    { name: 'AI-Assisted Development', icon: SiOpenai },
+    { name: 'LangChain & OpenAI', icon: FaBrain },
   ],
 }
 
@@ -86,8 +89,13 @@ export const projects = [
 
 export const education = [
   {
+    degree: 'AI-Powered Full Stack Web Development (MERN + SQL + AI)',
+    institution: 'Techmindz',
+    period: '2026 – Present',
+    status: 'Pursuing',
+  },
+  {
     degree: 'Bachelor of Computer Applications (BCA)',
-    department: 'Department of Computer Science',
     institution: 'Don Bosco Arts and Science College',
     university: 'Kannur University',
     period: '2023 – 2026',
@@ -95,6 +103,7 @@ export const education = [
   },
   {
     degree: 'Higher Secondary Education (Plus Two)',
+    department: 'Computer Science',
     institution: 'St. Mary\'s Higher Secondary School, Edoor',
     period: '2021 – 2023',
     score: '82%',
@@ -115,40 +124,40 @@ export const milestones = [
     highlights: ['95% Score', 'Computer Science', 'Mathematics', 'Academic Excellence'],
   },
   {
-    title: 'Higher Secondary — Plus Two',
+    title: 'Higher Secondary — Computer Science',
     period: '2023',
     description: 'Completed Plus Two at St. Mary\'s Higher Secondary School, Edoor with 82%. Started exploring web technologies and programming fundamentals.',
     highlights: ['82% Score', 'Computer Science', 'First Steps in Coding', 'Problem Solving'],
   },
   {
-    title: 'Vision Track — First Major Project',
-    period: '2024 – 2025',
-    description: 'Built the Vision Track intelligent monitoring & management system. Applied AI-assisted development techniques for the first time. Started building this portfolio website.',
-    highlights: ['Vision Track Project', 'AI Integration', 'Portfolio Website', 'Prompt Engineering'],
+    title: 'BCA',
+    period: '2023 – Present',
+    description: 'Enrolled in BCA at Don Bosco Arts and Science College, Kannur University. Learning HTML, CSS, JavaScript and building real websites with AI-assisted development.',
+    highlights: ['HTML & CSS', 'JavaScript', 'Web Development', 'AI-Assisted Tools'],
   },
   {
-    title: 'BCA — Computer Science',
-    period: '2023 – Present',
-    description: 'Enrolled in BCA (Department of Computer Science) at Don Bosco Arts and Science College, Kannur University. Learning HTML, CSS, JavaScript and building real websites with AI-assisted development.',
-    highlights: ['HTML & CSS', 'JavaScript', 'Web Development', 'AI-Assisted Tools'],
+    title: 'Full Stack AI Development',
+    period: '2026 – Present',
+    description: 'Enrolled in AI-Powered Full Stack Web Development at Techmindz. Mastering MERN stack, MySQL, Sequelize ORM, and integrating AI features using OpenAI API and LangChain.',
+    highlights: ['MERN Stack', 'MySQL & Sequelize', 'OpenAI & LangChain', 'AI Integration'],
   },
 ]
 
 export const services = [
   {
-    title: 'Web Development',
-    description: 'Building responsive, modern websites using HTML, CSS, and JavaScript. Creating user-focused interfaces with clean code and thoughtful design.',
-    features: ['HTML5 & CSS3', 'JavaScript', 'Responsive Design', 'Cross-Browser Compatible', 'Performance Optimized'],
+    title: 'Modern Web Development',
+    description: 'Architecting high-performance, responsive user interfaces using React, JavaScript, and modern CSS frameworks. Focused on delivering premium digital experiences with fluid animations and clean code.',
+    features: ['React & UI/UX', 'Tailwind CSS', 'Framer Motion', 'Responsive Design', 'Performance Optimization'],
   },
   {
-    title: 'AI-Assisted Development',
-    description: 'Leveraging AI tools and prompt engineering to accelerate development workflows. Building smarter, faster, and maintaining quality through AI-assisted coding.',
-    features: ['AI-Assisted Coding', 'Prompt Engineering', 'Rapid Prototyping', 'Smart Development', 'Quality Assurance'],
+    title: 'Full Stack Engineering',
+    description: 'Developing robust, scalable backend architectures and complete web applications. Proficient in both NoSQL (MongoDB) and Relational (MySQL) ecosystems with seamless API integrations.',
+    features: ['Node.js & Express', 'MongoDB & Mongoose', 'MySQL & Sequelize', 'RESTful APIs', 'Secure Authentication'],
   },
   {
-    title: 'Full Stack Applications',
-    description: 'Building complete web applications with the MERN stack — from database design and API development to responsive frontend interfaces.',
-    features: ['MongoDB & Mongoose', 'Express.js APIs', 'React Frontend', 'Node.js Backend', 'Authentication'],
+    title: 'AI Integration & Solutions',
+    description: 'Building intelligent applications by integrating cutting-edge AI technologies. Leveraging OpenAI APIs and LangChain to create smart workflows, chatbots, and advanced AI-powered features.',
+    features: ['OpenAI API Integration', 'LangChain Framework', 'AI Chatbots', 'Prompt Engineering', 'AI-Assisted Workflows'],
   },
 ]
 

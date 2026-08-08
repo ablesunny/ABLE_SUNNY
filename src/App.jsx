@@ -21,7 +21,7 @@ function App() {
   const [cursorVariant, setCursorVariant] = useState('default')
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2800)
+    const timer = setTimeout(() => setLoading(false), 2400)
     return () => clearTimeout(timer)
   }, [])
 
