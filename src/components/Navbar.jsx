@@ -58,8 +58,8 @@ const Navbar = ({ onCursorEnter, onCursorLeave }) => {
         initial={{ y: -40, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 sm:px-6 md:px-12 lg:px-20 py-5 transition-all duration-500 ${
-          scrolled ? 'border-b border-white/[0.06] bg-[#0A0A0A]/90 backdrop-blur-md py-4' : ''
+        className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 sm:px-6 md:px-12 lg:px-20 pt-[max(1.25rem,env(safe-area-inset-top))] pb-5 transition-all duration-500 ${
+          scrolled ? 'border-b border-white/[0.06] bg-[#0A0A0A]/90 backdrop-blur-md pt-[max(1rem,env(safe-area-inset-top))] pb-4' : ''
         }`}
         role="navigation"
         aria-label="Main navigation"

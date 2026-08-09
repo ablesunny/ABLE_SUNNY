@@ -35,7 +35,6 @@ const Hero = ({ onCursorEnter, onCursorLeave }) => {
     offset: ['start start', 'end start'],
   })
   const yBg = useTransform(scrollYProgress, [0, 1], ['0%', '20%'])
-  const opacityText = useTransform(scrollYProgress, [0, 0.5], [1, 0])
   
   // Mouse Parallax
   const mouseX = useMotionValue(0)
@@ -183,7 +182,7 @@ const Hero = ({ onCursorEnter, onCursorLeave }) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 3.1, duration: 1 }}
-        className="absolute bottom-6 md:bottom-12 right-6 md:right-12 flex flex-col items-center gap-4 z-20 mix-blend-difference"
+        className="absolute bottom-[max(1.5rem,env(safe-area-inset-bottom))] md:bottom-[max(3rem,env(safe-area-inset-bottom))] right-6 md:right-12 flex flex-col items-center gap-4 z-20 mix-blend-difference"
       >
         <span className="text-[8px] md:text-[10px] font-[family-name:var(--font-heading)] uppercase tracking-[0.4em] text-white/50" style={{ writingMode: 'vertical-lr' }}>Scroll</span>
         <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}>

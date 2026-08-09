@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FaGithub, FaExternalLinkAlt, FaTimes, FaArrowRight } from 'react-icons/fa'
 import SectionHeading from '../components/SectionHeading'
@@ -21,7 +21,7 @@ const ProjectModal = ({ project, onClose }) => (
       exit={{ opacity: 0, y: 40, scale: 0.98 }}
       transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
       onClick={(e) => e.stopPropagation()}
-      className="max-w-3xl w-full bg-[#111] border border-white/[0.06] overflow-y-auto max-h-[90vh]"
+      className="max-w-3xl w-full bg-[#111] border border-white/[0.06] overflow-y-auto max-h-[85svh] overscroll-contain"
     >
       <div className="relative">
         <img src={project.image} alt={project.title} className="w-full aspect-[16/9] object-cover" loading="lazy" />
@@ -45,7 +45,11 @@ const ProjectModal = ({ project, onClose }) => (
           <a href={project.github} target="_blank" rel="noopener noreferrer" className="btn-secondary btn-sm flex items-center gap-2">
             <FaGithub /> Source Code
           </a>
-          {project.live !== '#' && (
+          {project.live === '#' ? (
+            <button disabled className="btn-primary btn-sm opacity-30 cursor-not-allowed" onClick={(e) => e.preventDefault()} aria-label="Live Demo Unavailable">
+              <span className="flex items-center gap-2"><FaExternalLinkAlt /> Live Demo</span>
+            </button>
+          ) : (
             <a href={project.live} target="_blank" rel="noopener noreferrer" className="btn-primary btn-sm">
               <span className="flex items-center gap-2"><FaExternalLinkAlt /> Live Demo</span>
             </a>
@@ -58,6 +62,16 @@ const ProjectModal = ({ project, onClose }) => (
 
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null)
+
+  useEffect(() => {
+    if (selectedProject) {
+      const originalOverflow = document.body.style.overflow
+      document.body.style.overflow = 'hidden'
+      return () => {
+        document.body.style.overflow = originalOverflow
+      }
+    }
+  }, [selectedProject])
 
   return (
     <section id="projects" className="section-padding relative">

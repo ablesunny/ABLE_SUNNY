@@ -29,7 +29,8 @@ function App() {
     if (loading) return
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (prefersReducedMotion) return
+    const isTouchDevice = window.matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window
+    if (prefersReducedMotion || isTouchDevice) return
 
     const lenis = new Lenis({
       duration: 1.6,

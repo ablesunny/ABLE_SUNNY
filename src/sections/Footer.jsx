@@ -3,7 +3,7 @@ import { FaGithub, FaLinkedin, FaEnvelope, FaHeart } from 'react-icons/fa'
 
 const Footer = () => {
   return (
-    <footer className="relative pt-12 sm:pt-16 md:pt-20 pb-6 sm:pb-8 border-t border-white/[0.06] overflow-hidden" role="contentinfo">
+    <footer className="relative pt-12 sm:pt-16 md:pt-20 pb-[max(1.5rem,env(safe-area-inset-bottom))] sm:pb-[max(2rem,env(safe-area-inset-bottom))] border-t border-white/[0.06] overflow-hidden" role="contentinfo">
       <div className="overflow-hidden mb-10 sm:mb-12 md:mb-16" aria-hidden="true">
         <div className="flex animate-marquee whitespace-nowrap">
           {Array.from({ length: 6 }).map((_, i) => (

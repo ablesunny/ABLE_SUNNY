@@ -1,6 +1,5 @@
 import { FaReact, FaNodeJs, FaGitAlt, FaGithub, FaFigma, FaHtml5, FaCss3Alt, FaLinkedin, FaEnvelope, FaMapMarkerAlt, FaPhone, FaDatabase, FaBrain } from 'react-icons/fa'
 import { SiJavascript, SiVercel, SiFramer, SiOpenai, SiTailwindcss, SiExpress, SiMongodb, SiMongoose, SiPostman, SiMysql } from 'react-icons/si'
-import { VscVscode } from 'react-icons/vsc'
 import { TbApi } from 'react-icons/tb'
 
 export const navLinks = [
