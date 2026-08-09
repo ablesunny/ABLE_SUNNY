@@ -110,7 +110,9 @@ const Hero = ({ onCursorEnter, onCursorLeave }) => {
               className="flex items-center gap-6"
             >
               <a 
-                href="/ABLE SUNNY.pdf" download="Able_Sunny_Resume.pdf"
+                href="/resume.pdf" 
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn-primary relative overflow-hidden group"
                 onMouseEnter={onCursorEnter}
                 onMouseLeave={onCursorLeave}

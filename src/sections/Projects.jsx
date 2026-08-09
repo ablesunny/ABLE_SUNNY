@@ -80,18 +80,15 @@ const Projects = () => {
 
         <div className="space-y-20 md:space-y-32">
           {projects.map((project, i) => (
-            <motion.div
+            <motion.button
               key={i}
               initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="group cursor-pointer"
+              className="group cursor-pointer text-left w-full block appearance-none bg-transparent border-none p-0 m-0"
               onClick={() => setSelectedProject(project)}
-              role="button"
-              tabIndex={0}
               aria-label={`View ${project.title} details`}
-              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedProject(project) } }}
             >
               {/* Alternating layout */}
               <div className={`grid lg:grid-cols-2 gap-8 lg:gap-16 items-center ${i % 2 === 1 ? 'lg:[direction:rtl]' : ''}`}>
@@ -173,7 +170,7 @@ const Projects = () => {
                 style={{ originX: i % 2 === 0 ? 0 : 1 }}
                 className="h-[1px] bg-white/[0.06] mt-12 md:mt-16"
               />
-            </motion.div>
+            </motion.button>
           ))}
         </div>
       </div>

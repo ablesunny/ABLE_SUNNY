@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 import { motion } from 'framer-motion'
-import emailjs from '@emailjs/browser'
+
 import { FaArrowRight, FaCheck, FaExclamationTriangle } from 'react-icons/fa'
 
 const Contact = () => {
@@ -10,25 +10,17 @@ const Contact = () => {
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
     setStatus('sending')
 
-    try {
-      await emailjs.sendForm(
-        'service_portfolio',
-        'template_contact',
-        formRef.current,
-        'YOUR_PUBLIC_KEY'
-      )
-      setStatus('sent')
-      setForm({ from_name: '', from_email: '', phone: '', message: '' })
-      setTimeout(() => setStatus('idle'), 4000)
-    } catch (error) {
-      console.error('EmailJS Error:', error)
-      setStatus('error')
-      setTimeout(() => setStatus('idle'), 4000)
-    }
+    const subject = `Contact from Able Sunny Portfolio: ${form.from_name}`
+    const body = `Name: ${form.from_name}\nEmail: ${form.from_email}\nPhone: ${form.phone}\n\nMessage:\n${form.message}`
+    
+    window.location.href = `mailto:ablesunnyofficial@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+    
+    setForm({ from_name: '', from_email: '', phone: '', message: '' })
+    setStatus('sent')
   }
 
   return (
@@ -113,8 +105,17 @@ const Contact = () => {
                 {/* Submit Arrow */}
                 <div className="flex items-center justify-between pt-4">
                   <div>
-                    {status === 'sent' && <p className="text-xs text-green-400/80 font-[family-name:var(--font-body)] font-semibold tracking-widest uppercase flex items-center gap-2"><FaCheck /> Sent Successfully</p>}
-                    {status === 'error' && <p className="text-xs text-red-400/80 font-[family-name:var(--font-body)] font-semibold tracking-widest uppercase flex items-center gap-2"><FaExclamationTriangle /> Failed to send</p>}
+                    {status === 'sent' && (
+                      <div className="flex flex-col gap-1.5">
+                        <p className="text-xs text-white/90 font-[family-name:var(--font-body)] font-semibold tracking-widest uppercase flex items-center gap-2">
+                          <FaCheck /> Opening Email App...
+                        </p>
+                        <p className="text-[9px] text-white/40 tracking-wider">
+                          If it didn't open, email ablesunnyofficial@gmail.com
+                        </p>
+                      </div>
+                    )}
+                    {status === 'error' && <p className="text-xs text-red-400/80 font-[family-name:var(--font-body)] font-semibold tracking-widest uppercase flex items-center gap-2"><FaExclamationTriangle /> Failed to open</p>}
                   </div>
                   <button
                     type="submit"
